@@ -1,5 +1,12 @@
 // Name: Isaac Snow
-// Did it recursively for fun/to see how big of a time difference it made/
+// Did it recursively for fun/to see how big of a time difference it made
+
+/*************
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+THIS ALGORITHM DOESN'T SOLVE PROBLEM CORRECTLY.
+I made this based off of my first incorrect algorithm and haven't updated it to my final dynamic solution.
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+**************/
 
 
 import java.util.*;

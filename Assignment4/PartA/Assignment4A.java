@@ -7,65 +7,44 @@ import static java.lang.Math.*;
 public class Assignment4A {
 
 	public int minPrice(String[] tiles) {
-		//return recurse(prepareArrays(tiles), new int[0], -1);
-    int[][] array = prepareArrays(tiles);
-    int[] results = new int[tiles.length];
-    int index = -1; // Don't block anything the first time.
 
-    for (int i = 0; i < array.length; i++) {
-      int[] current = nth(array, i);
+    int[][] arrays = prepareArrays(tiles);
 
-      // Store the index rather than the result so I can have the index that's blocked for the next call.
-      index = findResultsIndex(current, next(array, i), index);
-      results[i] = current[index];
-    }
+		int[] possibilities = arrays[0];
 
-    return sum(results);
-	}
-
-	private int findResultsIndex(int[] current, int[] next, int blocked) {
-
-    int[] ints = current;
-		int index = indexOfMin(ints);
-		int min = ints[index];
-
-    // If we wouldn't be blocking the best case for the next set and if this isn't blocked
-		if (min < next[index] && index != blocked) {
-			return index;
-		} else {
-			ints[index] = 1001; // 1001 because values are between 1 and 1000 so all other vals will be less than this.
+		for (int i = 0; i < arrays.length - 1; i++) {
+			possibilities = findResults(possibilities, next(arrays, i));
 		}
 
-		index = indexOfMin(ints);
-		min = ints[index];
+		return findMin(possibilities);
+	}
 
-    // If we wouldn't be blocking the best case for the next set and if this isn't blocked
-		if (min < next[index] && index != blocked) {
-			return index;
- 		} else {
-			ints[index] = 1001; // 1001 because values are between 1 and 1000 so all other vals will be less than this.
+	private int[] findResults(int[] current, int[] next) {
+		int[] results = new int[current.length];
+
+		for (int i = 0; i < current.length; i++) {
+			results[i] = minWithout(current, next[i], i);
 		}
 
-    // Just return the last possible choice.
-		return indexOfMin(ints);
+		return results;
 	}
 
-	private int indexOfMin(int[] array) {
-		if (array[0] <= array[1] && array[0] <= array[2]) return 0;
-
-		if (array[1] <= array[0] && array[1] <= array[2]) return 1;
-
-		return 2;
+	private int minWithout(int[] current, int next, int index) {
+		return minFromArray(withoutIndex(current, index), next);
 	}
 
-	private int sum(int[] results) {
-    int sum = 0;
+	private int minFromArray(int[] array, int constVal) {
+		int min = array[0] + constVal;
 
-    for (int i : results) {
-      sum += i;
-    }
+		for (int i = 0; i < array.length; i++) {
+			min = Math.min(array[i] + constVal, min);
+		}
 
-    return sum;
+		return min;
+	}
+
+	private int findMin(int[] array) {
+		return minFromArray(array, 0);
 	}
 
 	// Array preperation
@@ -102,9 +81,23 @@ public class Assignment4A {
 	}
 
   private int[] next(int[][] array, int current) {
-    if (current + 1 < array.length) return nth(array, current + 1);
+		if (array.length == current) return new int[array[0].length];
 
-    // If next doesn't exist, return array of ints that will always be larger than ones being checked.
-    return new int[]{ 1001, 1001, 1001 };
+    return nth(array, current + 1);
   }
+
+	private int[] withoutIndex(int[] array, int skipIndex) {
+		int[] out = new int[array.length - 1];
+
+		for (int i = 0; i < array.length; i++) {
+			if (i != skipIndex) {
+				if (i < skipIndex)
+					out[i] = array[i];
+				else
+					out[i - 1] = array[i];
+			}
+		}
+
+		return out;
+	}
 }
