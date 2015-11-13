@@ -1,5 +1,3 @@
-I decided to implement this recursevely and iteratively for fun to see if there was a big time difference. All test cases were the same except the first one which was rougly ```0.0s``` for the iterative algorithm and ```0.076s``` for the recursive algorithm.
-
 # The recursive algorithm does not work. I have not updated it to work in the dynamic way like the iterative function.
 
 ***This was copied from the assignment description and modified slighlty for github***
