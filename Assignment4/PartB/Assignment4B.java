@@ -10,6 +10,15 @@ public class Assignment4B {
 
 		char[][] graph = prepareGraph(map);
 
+		int[][] times = findAllTimes(graph);
+
+		if (!allParked(times)) return -1;
+
+		return findLowestTime(times);
+	}
+
+	private int[][] findAllTimes(char[][] graph) {
+
 		ArrayList<int[]> bikeCoords = findBikeCoords(graph);
 		ArrayList<int[]> spaceCoords = findSpaceCoords(graph);
 
@@ -21,9 +30,7 @@ public class Assignment4B {
 			}
 		}
 
-		if (!allParked(times)) return -1;
-
-		return findLowestTime(times);
+		return times;
 	}
 
 	private ArrayList<int[]> findBikeCoords(char[][] graph) {
