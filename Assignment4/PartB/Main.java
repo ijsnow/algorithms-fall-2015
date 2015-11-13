@@ -72,7 +72,7 @@ public class Main {
     endTime = System.currentTimeMillis();
 
     System.out.println("Input: " + Arrays.toString(input));
-    System.out.println("Output: " + num); // TA says 96? I get 83
+    System.out.println("Output: " + num); // 96
 
     System.out.println("Time: " + (endTime - startTime) / 1000.0 + " seconds");
 
