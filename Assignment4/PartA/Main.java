@@ -127,5 +127,18 @@ public class Main {
     System.out.println("Output: " + num);
 
     System.out.println("Time: " + (endTime - startTime) / 1000.0 + " seconds");
+
+    System.out.println("----------------------------------------------------------------");
+    System.out.println("----------------------------------------------------------------");
+
+    startTime = System.currentTimeMillis();
+
+    num = test.minPrice(new String[]{ "2 3 4", "100 100 100", "53 63 73", "59 42 5", "52 52 46", "7 8 4" }); // 216
+
+    endTime = System.currentTimeMillis();
+
+    System.out.println("Output: " + num);
+
+    System.out.println("Time: " + (endTime - startTime) / 1000.0 + " seconds");
   }
 }
